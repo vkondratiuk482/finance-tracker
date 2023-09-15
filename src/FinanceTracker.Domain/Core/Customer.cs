@@ -1,23 +1,51 @@
 using FinanceTracker.Domain.Core.Enums;
+using FinanceTracker.Domain.Core.ValueObjects;
 
 namespace FinanceTracker.Domain.Core;
 
 public class Customer
 {
     public Guid Id { get; private set; }
-    
-    private readonly List<Budget> _budgets;
-    
+
+    private List<Budget> _budgets;
+
+    /**
+     * .AsReadOnly() covers the following scenario:
+     * (customer.Budgets as List<Budget>).Clear()
+     */
+    public IReadOnlyList<Budget> Budgets => _budgets.AsReadOnly();
+
+    public Email Email { get; private set; }
+
     private ITaxationStrategy TaxationStrategy { get; set; }
 
-    public Customer(TaxationTypes taxationType)
+    public Customer(TaxationTypes taxationType, string email)
     {
         Id = Guid.NewGuid();
+        Email = new Email(email);
         _budgets = new List<Budget>();
         TaxationStrategy = taxationType switch
         {
             TaxationTypes.Zero => new ZeroTaxationStrategy(),
             TaxationTypes.Fop3 => new Fop3TaxationStrategy()
         };
+    }
+
+    public void AddBudget(Budget budget)
+    {
+        _budgets.Add(budget);
+    }
+
+    public void RemoveBudget(Budget budget)
+    {
+        _budgets.Remove(budget);
+    }
+    
+    public int CalculateTotalIncome(int index)
+    {
+        var budget = _budgets[index];
+        var income = budget.CalculateTotalIncome();
+
+        return income - TaxationStrategy.Calculate(income);
     }
 }

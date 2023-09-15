@@ -17,6 +17,6 @@ public class Budget
 
     public int CalculateTotalIncome()
     {
-        throw new NotImplementedException();
+        return _categories.Sum(category => category.CalculateTotalIncome());
     }
 }
