@@ -5,7 +5,7 @@ namespace FinanceTracker.Domain.Core;
 
 public class Customer
 {
-    public Guid Id { get; private set; }
+    public CustomerId Id { get; private set; }
 
     private List<Budget> _budgets;
 
@@ -19,10 +19,10 @@ public class Customer
 
     private ITaxationStrategy TaxationStrategy { get; set; }
 
-    public Customer(TaxationTypes taxationType, string email)
+    public Customer(TaxationTypes taxationType, Email email)
     {
-        Id = Guid.NewGuid();
-        Email = new Email(email);
+        Email = email;
+        Id = new CustomerId(Guid.NewGuid());
         _budgets = new List<Budget>();
         TaxationStrategy = taxationType switch
         {
@@ -40,7 +40,7 @@ public class Customer
     {
         _budgets.Remove(budget);
     }
-    
+
     public int CalculateTotalIncome(int index)
     {
         var budget = _budgets[index];
