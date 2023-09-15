@@ -4,19 +4,32 @@ namespace FinanceTracker.Domain.Core;
 
 public class Category
 {
-    public Guid Id { get; private set; }
+    public CategoryId Id { get; init; }
 
     public string Name { get; private set; }
 
-    public Guid BudgetId { get; private set; }
+    public BudgetId BudgetId { get; private set; }
 
     private readonly List<Source> _sources;
 
-    public Category(string name, Guid budgetId)
+    public IReadOnlyList<Source> Sources => _sources.AsReadOnly();
+
+    public Category(string name, BudgetId budgetId)
     {
+        Id = new CategoryId(Guid.NewGuid());
         Name = name;
         BudgetId = budgetId;
         _sources = new List<Source>();
+    }
+
+    public void AddSource(Source source)
+    {
+        _sources.Add(source);
+    }
+
+    public void RemoveSource(Source source)
+    {
+        _sources.Remove(source);
     }
 
     public int CalculateTotalIncome()

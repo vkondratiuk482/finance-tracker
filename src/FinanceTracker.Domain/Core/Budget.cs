@@ -2,17 +2,29 @@ namespace FinanceTracker.Domain.Core;
 
 public class Budget
 {
-    public Guid Id { get; private set; }
-    
-    public Guid CustomerId { get; private set; }
+    public BudgetId Id { get; init; }
+
+    public CustomerId CustomerId { get; private set; }
 
     private readonly List<Category> _categories;
-    
-    public Budget(Guid customerId)
+
+    public IReadOnlyList<Category> Categories => _categories.AsReadOnly();
+
+    public Budget(CustomerId customerId)
     {
-        Id =  Guid.NewGuid();
+        Id = new BudgetId(Guid.NewGuid());
         CustomerId = customerId;
         _categories = new List<Category>();
+    }
+
+    public void AddCategory(Category category)
+    {
+        _categories.Add(category);
+    }
+
+    public void RemoveCategory(Category category)
+    {
+        _categories.Remove(category);
     }
 
     public int CalculateTotalIncome()

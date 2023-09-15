@@ -5,9 +5,9 @@ namespace FinanceTracker.Domain.Core;
 
 public class Customer
 {
-    public CustomerId Id { get; private set; }
+    public CustomerId Id { get; init; }
 
-    private List<Budget> _budgets;
+    private readonly List<Budget> _budgets;
 
     /**
      * .AsReadOnly() covers the following scenario:
@@ -41,7 +41,7 @@ public class Customer
         _budgets.Remove(budget);
     }
 
-    public int CalculateTotalIncome(int index)
+    public int CalculateTotalNet(int index)
     {
         var budget = _budgets[index];
         var income = budget.CalculateTotalIncome();
