@@ -21,14 +21,10 @@ public class Customer
 
     public Customer(TaxationTypes taxationType, Email email)
     {
-        Email = email;
         Id = new CustomerId(Guid.NewGuid());
+        Email = email;
         _budgets = new List<Budget>();
-        TaxationStrategy = taxationType switch
-        {
-            TaxationTypes.Zero => new ZeroTaxationStrategy(),
-            TaxationTypes.Fop3 => new Fop3TaxationStrategy()
-        };
+        TaxationStrategy = TaxationStrategyFactory.Create(taxationType);
     }
 
     public void AddBudget(Budget budget)
@@ -41,6 +37,11 @@ public class Customer
         _budgets.Remove(budget);
     }
 
+    public void UpdateTaxationStrategy(TaxationTypes taxationType)
+    {
+        TaxationStrategy = TaxationStrategyFactory.Create(taxationType);
+    }
+    
     public int CalculateTotalNet(int index)
     {
         var budget = _budgets[index];

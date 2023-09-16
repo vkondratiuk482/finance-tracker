@@ -22,5 +22,9 @@ internal static class Program
         category.AddSource(source);
 
         Console.WriteLine($"Hey {customer.Email.Value}, your net is {customer.CalculateTotalNet(0)}");
+        
+        customer.UpdateTaxationStrategy(TaxationTypes.Zero);
+        
+        Console.WriteLine($"Hey {customer.Email.Value}, your net is {customer.CalculateTotalNet(0)}");
     }
 }
