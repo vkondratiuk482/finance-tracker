@@ -1,6 +1,4 @@
-using FinanceTracker.Domain.Core.Enums;
-
-namespace FinanceTracker.Domain.Core;
+namespace FinanceTracker.Domain.Customers.Strategies;
 
 public static class TaxationStrategyFactory
 {

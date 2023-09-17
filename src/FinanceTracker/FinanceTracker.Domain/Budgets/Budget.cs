@@ -1,4 +1,6 @@
-namespace FinanceTracker.Domain.Core;
+using FinanceTracker.Domain.Customers;
+
+namespace FinanceTracker.Domain.Budgets;
 
 public class Budget
 {

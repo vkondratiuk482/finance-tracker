@@ -1,6 +1,5 @@
-﻿using FinanceTracker.Domain.Core;
-using FinanceTracker.Domain.Core.Enums;
-using FinanceTracker.Domain.Core.ValueObjects;
+﻿using FinanceTracker.Domain.Budgets;
+using FinanceTracker.Domain.Customers;
 
 namespace FinanceTracker.Domain;
 

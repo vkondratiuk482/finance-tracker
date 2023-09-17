@@ -1,12 +1,10 @@
+using FinanceTracker.Domain.Customers;
 using FinanceTracker.Application.Common;
-using FinanceTracker.Domain.Core.Enums;
 
-namespace FinanceTracker.Application.Modules.Customer.Commands.CreateCustomer;
+namespace FinanceTracker.Application.Modules.Customers.Commands.CreateCustomer;
 
 public class CreateCustomerCommand : ICommand
 {
-    public string Id { get; }
-    
     public string Email { get; set; }
 
     public TaxationTypes TaxationType { get; set; }

@@ -1,8 +1,7 @@
-using FinanceTracker.Domain.Core;
 using FinanceTracker.Application.Common;
-using FinanceTracker.Domain.Core.ValueObjects;
+using FinanceTracker.Domain.Customers;
 
-namespace FinanceTracker.Application.Modules.Customer.Commands.CreateCustomer;
+namespace FinanceTracker.Application.Modules.Customers.Commands.CreateCustomer;
 
 public class CreateCustomerHandler : IHandler<CreateCustomerCommand>
 {
@@ -15,8 +14,7 @@ public class CreateCustomerHandler : IHandler<CreateCustomerCommand>
 
     public async Task Handle(CreateCustomerCommand command)
     {
-        // figure out why doesn't it work as expected
-        var customer = new Domain.Core.Customer(command.TaxationType, new Email(command.Email));
+        var customer = new Customer(command.TaxationType, new Email(command.Email));
 
         await _customerRepository.AddAsync(customer);
     }

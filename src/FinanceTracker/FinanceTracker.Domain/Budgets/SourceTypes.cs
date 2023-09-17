@@ -1,4 +1,4 @@
-namespace FinanceTracker.Domain.Core.Enums;
+namespace FinanceTracker.Domain.Budgets;
 
 public enum SourceTypes
 {

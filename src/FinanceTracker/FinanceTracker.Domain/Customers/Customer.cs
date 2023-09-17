@@ -1,7 +1,7 @@
-using FinanceTracker.Domain.Core.Enums;
-using FinanceTracker.Domain.Core.ValueObjects;
+using FinanceTracker.Domain.Budgets;
+using FinanceTracker.Domain.Customers.Strategies;
 
-namespace FinanceTracker.Domain.Core;
+namespace FinanceTracker.Domain.Customers;
 
 public class Customer
 {

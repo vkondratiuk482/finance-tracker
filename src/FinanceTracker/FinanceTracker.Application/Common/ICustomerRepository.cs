@@ -1,4 +1,4 @@
-using FinanceTracker.Domain.Core;
+using FinanceTracker.Domain.Customers;
 
 namespace FinanceTracker.Application.Common;
 

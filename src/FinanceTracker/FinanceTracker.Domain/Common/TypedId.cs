@@ -1,3 +1,3 @@
-namespace FinanceTracker.Domain.Core;
+namespace FinanceTracker.Domain.Common;
 
 public abstract record TypedId(Guid Value);

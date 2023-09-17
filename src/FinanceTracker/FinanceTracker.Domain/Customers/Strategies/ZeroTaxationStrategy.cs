@@ -1,4 +1,4 @@
-namespace FinanceTracker.Domain.Core;
+namespace FinanceTracker.Domain.Customers.Strategies;
 
 public class ZeroTaxationStrategy : ITaxationStrategy
 {
