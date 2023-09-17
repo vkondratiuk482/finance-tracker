@@ -23,7 +23,7 @@ internal static class Program
 
         Console.WriteLine($"Hey {customer.Email.Value}, your net is {customer.CalculateTotalNet(0)}");
         
-        customer.UpdateTaxationStrategy(TaxationTypes.Zero);
+        customer.UpdateTaxationType(TaxationTypes.Zero);
         
         Console.WriteLine($"Hey {customer.Email.Value}, your net is {customer.CalculateTotalNet(0)}");
     }

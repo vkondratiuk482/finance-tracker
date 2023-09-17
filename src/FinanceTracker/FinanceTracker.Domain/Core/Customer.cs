@@ -17,14 +17,14 @@ public class Customer
 
     public Email Email { get; private set; }
 
-    private ITaxationStrategy TaxationStrategy { get; set; }
-
+    public TaxationTypes TaxationType { get; private set; }
+    
     public Customer(TaxationTypes taxationType, Email email)
     {
         Id = new CustomerId(Guid.NewGuid());
         Email = email;
+        TaxationType = taxationType;
         _budgets = new List<Budget>();
-        TaxationStrategy = TaxationStrategyFactory.Create(taxationType);
     }
 
     public void AddBudget(Budget budget)
@@ -37,9 +37,9 @@ public class Customer
         _budgets.Remove(budget);
     }
 
-    public void UpdateTaxationStrategy(TaxationTypes taxationType)
+    public void UpdateTaxationType(TaxationTypes taxationType)
     {
-        TaxationStrategy = TaxationStrategyFactory.Create(taxationType);
+        TaxationType = taxationType;
     }
     
     public int CalculateTotalNet(int index)
@@ -47,6 +47,8 @@ public class Customer
         var budget = _budgets[index];
         var income = budget.CalculateTotalIncome();
 
-        return income - TaxationStrategy.Calculate(income);
+        var taxationStrategy = TaxationStrategyFactory.Create(TaxationType);
+        
+        return income - taxationStrategy.Calculate(income);
     }
 }
