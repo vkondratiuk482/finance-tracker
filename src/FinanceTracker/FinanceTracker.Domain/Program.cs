@@ -16,7 +16,7 @@ internal static class Program
 
         budget.AddCategory(category);
 
-        var source = new Source(10000, "Weekly payment", SourceTypes.Income, category.Id);
+        var source = new Source(10000, SourceTypes.Income, SourceFrequencies.Monthly, "Weekly payment", category.Id);
 
         category.AddSource(source);
 
