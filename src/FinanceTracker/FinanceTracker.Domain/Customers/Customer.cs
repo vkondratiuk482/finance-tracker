@@ -27,6 +27,12 @@ public class Customer
         _budgets = new List<Budget>();
     }
 
+    // Private constructor for EF Core
+    private Customer()
+    {
+        
+    }
+
     public void AddBudget(Budget budget)
     {
         _budgets.Add(budget);
