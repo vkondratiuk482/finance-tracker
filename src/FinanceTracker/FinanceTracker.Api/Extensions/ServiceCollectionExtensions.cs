@@ -21,5 +21,7 @@ public static class ServiceCollectionExtensions
             $"Host={postgresHost};Port={postgresPort};Database={postgresDatabase};Username={postgresUser};Password={postgresPassword}";
         
         services.AddNpgsql<ApplicationContext>(connectionString);
+
+        return services;
     }
 }
