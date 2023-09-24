@@ -1,10 +1,8 @@
-using FinanceTracker.Domain.Customers;
-
-namespace FinanceTracker.Application.Common;
+namespace FinanceTracker.Domain.Customers;
 
 public interface ICustomerRepository
 {
-    Task<Customer?> GetById(CustomerId id);
+    Task<Customer?> GetById(Guid id);
     
     Task AddAsync(Customer customer);
     

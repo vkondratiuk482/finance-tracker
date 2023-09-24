@@ -4,9 +4,9 @@ namespace FinanceTracker.Domain.Budgets;
 
 public class Budget
 {
-    public BudgetId Id { get; init; }
+    public Guid Id { get; init; }
 
-    public CustomerId CustomerId { get; private set; }
+    public Guid CustomerId { get; private set; }
 
     private int _payday;
 
@@ -27,12 +27,16 @@ public class Budget
 
     public IReadOnlyList<Category> Categories => _categories.AsReadOnly();
 
-    public Budget(CustomerId customerId, int payday = 1)
+    public Budget(Guid customerId, int payday = 1)
     {
-        Id = new BudgetId(Guid.NewGuid());
+        Id = Guid.NewGuid();
         Payday = payday;
         CustomerId = customerId;
         _categories = new List<Category>();
+    }
+
+    private Budget()
+    {
     }
 
     public void AddCategory(Category category)

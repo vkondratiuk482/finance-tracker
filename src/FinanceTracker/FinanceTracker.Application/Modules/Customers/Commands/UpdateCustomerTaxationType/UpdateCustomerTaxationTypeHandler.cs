@@ -15,9 +15,7 @@ public class UpdateCustomerTaxationTypeHandler : IHandler<UpdateCustomerTaxation
 
     public async Task Handle(UpdateCustomerTaxationTypeCommand command)
     {
-        var id = new CustomerId(Guid.Parse(command.Id));
-
-        var customer = await _customerRepository.GetById(id);
+        var customer = await _customerRepository.GetById(command.Id);
 
         customer.UpdateTaxationType(command.TaxationType);
 

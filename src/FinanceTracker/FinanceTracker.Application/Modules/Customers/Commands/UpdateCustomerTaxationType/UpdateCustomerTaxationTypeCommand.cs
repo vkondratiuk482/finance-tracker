@@ -5,7 +5,7 @@ namespace FinanceTracker.Application.Modules.Customers.Commands.UpdateCustomerTa
 
 public class UpdateCustomerTaxationTypeCommand : ICommand
 {
-    public string Id { get; set; }
+    public Guid Id { get; set; }
 
     public TaxationTypes TaxationType { get; set; }
 }

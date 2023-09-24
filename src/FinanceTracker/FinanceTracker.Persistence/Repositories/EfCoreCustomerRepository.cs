@@ -1,4 +1,3 @@
-using FinanceTracker.Application.Common;
 using FinanceTracker.Domain.Customers;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +12,7 @@ public class EfCoreCustomerRepository : ICustomerRepository
         _applicationContext = applicationContext;
     }
 
-    public async Task<Customer?> GetById(CustomerId id)
+    public async Task<Customer?> GetById(Guid id)
     {
         return await _applicationContext.Customers
             .Where(x => x.Id == id)

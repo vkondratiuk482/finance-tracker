@@ -5,7 +5,7 @@ namespace FinanceTracker.Domain.Customers;
 
 public class Customer
 {
-    public CustomerId Id { get; init; }
+    public Guid Id { get; init; }
 
     private readonly List<Budget> _budgets;
 
@@ -18,19 +18,17 @@ public class Customer
     public Email Email { get; private set; }
 
     public TaxationTypes TaxationType { get; private set; }
-    
+
     public Customer(TaxationTypes taxationType, Email email)
     {
-        Id = new CustomerId(Guid.NewGuid());
+        Id = Guid.NewGuid();
         Email = email;
         TaxationType = taxationType;
         _budgets = new List<Budget>();
     }
 
-    // Private constructor for EF Core
     private Customer()
     {
-        
     }
 
     public void AddBudget(Budget budget)
@@ -47,14 +45,14 @@ public class Customer
     {
         TaxationType = taxationType;
     }
-    
+
     public int CalculateTotalNet(int index)
     {
         var budget = _budgets[index];
         var income = budget.CalculateTotalIncome();
 
         var taxationStrategy = TaxationStrategyFactory.Create(TaxationType);
-        
+
         return income - taxationStrategy.Calculate(income);
     }
 }
