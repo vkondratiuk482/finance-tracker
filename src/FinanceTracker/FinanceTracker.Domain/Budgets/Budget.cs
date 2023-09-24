@@ -1,10 +1,11 @@
-using FinanceTracker.Domain.Common;
 using FinanceTracker.Domain.Customers;
 
 namespace FinanceTracker.Domain.Budgets;
 
-public class Budget : AggregateRoot<BudgetId, Guid>
+public class Budget
 {
+    public BudgetId Id { get; init; }
+
     public CustomerId CustomerId { get; private set; }
 
     private int _payday;
@@ -26,16 +27,12 @@ public class Budget : AggregateRoot<BudgetId, Guid>
 
     public IReadOnlyList<Category> Categories => _categories.AsReadOnly();
 
-    public Budget(CustomerId customerId, int payday = 1) : base(new BudgetId(Guid.NewGuid()))
+    public Budget(CustomerId customerId, int payday = 1)
     {
         Id = new BudgetId(Guid.NewGuid());
         Payday = payday;
         CustomerId = customerId;
         _categories = new List<Category>();
-    }
-
-    private Budget()
-    {
     }
 
     public void AddCategory(Category category)

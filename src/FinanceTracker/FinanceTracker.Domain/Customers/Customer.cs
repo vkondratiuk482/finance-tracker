@@ -1,11 +1,12 @@
 using FinanceTracker.Domain.Budgets;
-using FinanceTracker.Domain.Common;
 using FinanceTracker.Domain.Customers.Strategies;
 
 namespace FinanceTracker.Domain.Customers;
 
-public class Customer : AggregateRoot<CustomerId, Guid>
+public class Customer
 {
+    public CustomerId Id { get; init; }
+
     private readonly List<Budget> _budgets;
 
     /**

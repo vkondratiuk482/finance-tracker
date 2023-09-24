@@ -20,10 +20,6 @@ public class Category
         _sources = new List<Source>();
     }
 
-    private Category()
-    {
-    }
-
     public void AddSource(Source source)
     {
         _sources.Add(source);
