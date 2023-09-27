@@ -1,6 +1,6 @@
 namespace FinanceTracker.Application.Common;
 
-public interface IHandler<TCommand> where TCommand : ICommand
+public interface IHandler<TCommand, TResponse> where TCommand : ICommand
 {
-    Task Handle(TCommand command);
+    TResponse Handle(TCommand command);
 }

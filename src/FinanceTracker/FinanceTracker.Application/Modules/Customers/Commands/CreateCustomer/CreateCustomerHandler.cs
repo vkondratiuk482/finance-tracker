@@ -3,7 +3,7 @@ using FinanceTracker.Domain.Customers;
 
 namespace FinanceTracker.Application.Modules.Customers.Commands.CreateCustomer;
 
-public class CreateCustomerHandler : IHandler<CreateCustomerCommand>
+public class CreateCustomerHandler : IHandler<CreateCustomerCommand, Task>
 {
     private readonly ICustomerRepository _customerRepository;
 

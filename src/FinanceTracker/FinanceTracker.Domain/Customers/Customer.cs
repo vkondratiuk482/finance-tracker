@@ -46,9 +46,16 @@ public class Customer
         TaxationType = taxationType;
     }
 
-    public int CalculateTotalNet(int index)
+    public int CalculateTotalNet(Guid budgetId)
     {
-        var budget = _budgets[index];
+        var budget = _budgets.FirstOrDefault(x => x.Id == budgetId);
+
+        if (budget is null)
+        {
+            return 0;
+            // throw BUDGET_NOT_FOUND
+        }
+        
         var income = budget.CalculateTotalIncome();
 
         var taxationStrategy = TaxationStrategyFactory.Create(TaxationType);

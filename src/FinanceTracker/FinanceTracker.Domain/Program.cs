@@ -20,10 +20,10 @@ internal static class Program
 
         category.AddSource(source);
 
-        Console.WriteLine($"Hey {customer.Email.Value}, your net is {customer.CalculateTotalNet(0)}");
+        Console.WriteLine($"Hey {customer.Email.Value}, your net is {customer.CalculateTotalNet(budget.Id)}");
         
         customer.UpdateTaxationType(TaxationTypes.Zero);
         
-        Console.WriteLine($"Hey {customer.Email.Value}, your net is {customer.CalculateTotalNet(0)}");
+        Console.WriteLine($"Hey {customer.Email.Value}, your net is {customer.CalculateTotalNet(budget.Id)}");
     }
 }

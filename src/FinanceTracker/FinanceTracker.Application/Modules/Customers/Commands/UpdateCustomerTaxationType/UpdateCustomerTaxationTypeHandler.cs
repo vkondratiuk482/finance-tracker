@@ -4,7 +4,7 @@ using FinanceTracker.Domain.Customers;
 
 namespace FinanceTracker.Application.Modules.Customers.Commands.UpdateCustomerTaxationType;
 
-public class UpdateCustomerTaxationTypeHandler : IHandler<UpdateCustomerTaxationTypeCommand>
+public class UpdateCustomerTaxationTypeHandler : IHandler<UpdateCustomerTaxationTypeCommand, Task>
 {
     private readonly ICustomerRepository _customerRepository;
 
