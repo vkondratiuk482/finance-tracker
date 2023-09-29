@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\FinanceTracker.Application\FinanceTracker.Application.csproj" />
       <ProjectReference Include="..\FinanceTracker.Persistence\FinanceTracker.Persistence.csproj" />
     </ItemGroup>
 
@@ -15,6 +16,7 @@
         <PrivateAssets>all</PrivateAssets>
         <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       </PackageReference>
+      <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     </ItemGroup>
 
 </Project>
