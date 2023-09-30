@@ -1,4 +1,3 @@
-using FinanceTracker.Api.Controllers;
 using FinanceTracker.Application.Modules.Customers.Commands.CreateCustomer;
 using FinanceTracker.Domain.Customers;
 using FinanceTracker.Persistence;
@@ -34,9 +33,8 @@ public static class ServiceCollectionExtensions
         }
 
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateCustomerCommand).Assembly));
         
-        // services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
-
         return services;
     }
 
