@@ -1,4 +1,4 @@
-using FinanceTracker.Application.Modules.Customers.Commands.CreateCustomer;
+using System.Reflection;
 using FinanceTracker.Domain.Customers;
 using FinanceTracker.Persistence;
 using FinanceTracker.Persistence.Repositories;
@@ -11,9 +11,9 @@ public static class ServiceCollectionExtensions
         ConfigurationManager configuration)
     {
         return services
-            .AddPersistenceLayer(configuration)
             .AddApiLayer()
-            .AddApplicationLayer();
+            .AddApplicationLayer()
+            .AddPersistenceLayer(configuration);
     }
 
     private static IServiceCollection AddApiLayer(this IServiceCollection services)
@@ -26,14 +26,11 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection AddApplicationLayer(this IServiceCollection services)
     {
+        Assembly.Load("FinanceTracker.Application");
+        
         var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-        foreach (var assembly in assemblies)
-        {
-            Console.WriteLine(assembly.FullName);
-        }
-
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(CreateCustomerCommand).Assembly));
+        
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));
         
         return services;
     }

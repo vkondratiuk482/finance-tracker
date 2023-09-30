@@ -19,12 +19,6 @@ public sealed class CustomerController : Controller
     [HttpPost]
     public async Task Create([FromQuery] string email, [FromQuery] string taxationType)
     {
-        var t = new CreateCustomerCommand
-        {
-            Email = email,
-            TaxationType = Enum.Parse<TaxationTypes>(taxationType)
-        };
-
         await _mediator.Send(new CreateCustomerCommand
         {
             Email = email,
