@@ -1,9 +1,9 @@
+using MediatR;
 using FinanceTracker.Domain.Customers;
-using FinanceTracker.Application.Common;
 
 namespace FinanceTracker.Application.Modules.Customers.Commands.UpdateCustomerTaxationType;
 
-public class UpdateCustomerTaxationTypeCommand : ICommand
+public class UpdateCustomerTaxationTypeCommand : IRequest
 {
     public Guid Id { get; set; }
 

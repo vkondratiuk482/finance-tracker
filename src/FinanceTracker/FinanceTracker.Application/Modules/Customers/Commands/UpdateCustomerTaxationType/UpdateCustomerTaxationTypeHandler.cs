@@ -1,10 +1,9 @@
-using FinanceTracker.Application.Common;
-using FinanceTracker.Application.Modules.Customers.Commands.CreateCustomer;
+using MediatR;
 using FinanceTracker.Domain.Customers;
 
 namespace FinanceTracker.Application.Modules.Customers.Commands.UpdateCustomerTaxationType;
 
-public class UpdateCustomerTaxationTypeHandler : IHandler<UpdateCustomerTaxationTypeCommand, Task>
+public sealed class UpdateCustomerTaxationTypeHandler : IRequestHandler<UpdateCustomerTaxationTypeCommand>
 {
     private readonly ICustomerRepository _customerRepository;
 
@@ -13,7 +12,7 @@ public class UpdateCustomerTaxationTypeHandler : IHandler<UpdateCustomerTaxation
         _customerRepository = customerRepository;
     }
 
-    public async Task Handle(UpdateCustomerTaxationTypeCommand command)
+    public async Task Handle(UpdateCustomerTaxationTypeCommand command, CancellationToken cancellationToken)
     {
         var customer = await _customerRepository.GetById(command.Id);
 

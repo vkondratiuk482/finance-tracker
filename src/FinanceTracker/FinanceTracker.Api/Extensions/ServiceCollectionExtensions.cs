@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Text.Json.Serialization;
 using FinanceTracker.Domain.Customers;
 using FinanceTracker.Persistence;
 using FinanceTracker.Persistence.Repositories;
@@ -18,7 +19,13 @@ public static class ServiceCollectionExtensions
 
     private static IServiceCollection AddApiLayer(this IServiceCollection services)
     {
-        services.AddControllers();
+        services
+            .AddControllers()
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
+        
         services.AddSwaggerGen();
 
         return services;
@@ -27,11 +34,11 @@ public static class ServiceCollectionExtensions
     private static IServiceCollection AddApplicationLayer(this IServiceCollection services)
     {
         Assembly.Load("FinanceTracker.Application");
-        
+
         var assemblies = AppDomain.CurrentDomain.GetAssemblies();
-        
+
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));
-        
+
         return services;
     }
 

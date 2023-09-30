@@ -1,7 +1,9 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using FinanceTracker.Domain.Customers;
+using FinanceTracker.Api.Requests.Customer;
+using FinanceTracker.Api.Responses.Common;
 using FinanceTracker.Application.Modules.Customers.Commands.CreateCustomer;
+using FinanceTracker.Application.Modules.Customers.Commands.UpdateCustomerTaxationType;
 
 namespace FinanceTracker.Api.Controllers;
 
@@ -17,12 +19,33 @@ public sealed class CustomerController : Controller
     }
 
     [HttpPost]
-    public async Task Create([FromQuery] string email, [FromQuery] string taxationType)
+    public async Task<StatusResponse> Create([FromBody] CreateCustomerRequest request)
     {
         await _mediator.Send(new CreateCustomerCommand
         {
-            Email = email,
-            TaxationType = Enum.Parse<TaxationTypes>(taxationType)
+            Email = request.Email,
+            TaxationType = request.TaxationType,
         });
+
+        return new StatusResponse
+        {
+            Success = true,
+        };
+    }
+
+    [HttpPatch]
+    public async Task<StatusResponse> UpdateTaxationType([FromQuery] Guid id,
+        [FromBody] UpdateCustomerTaxationTypeRequest request)
+    {
+        await _mediator.Send(new UpdateCustomerTaxationTypeCommand()
+        {
+            Id = id,
+            TaxationType = request.TaxationType,
+        });
+
+        return new StatusResponse
+        {
+            Success = true,
+        };
     }
 }
