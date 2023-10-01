@@ -1,7 +1,7 @@
 using MediatR;
 using FinanceTracker.Domain.Customers;
 
-namespace FinanceTracker.Application.Modules.Customers.Commands.UpdateCustomerTaxationType;
+namespace FinanceTracker.Application.Modules.Customers.Commands.UpdateTaxationType;
 
 public class UpdateCustomerTaxationTypeCommand : IRequest
 {

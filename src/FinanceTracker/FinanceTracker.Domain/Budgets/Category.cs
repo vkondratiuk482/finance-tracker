@@ -40,4 +40,11 @@ public class Category
             .Where(source => source.Type == SourceTypes.Income)
             .Sum(source => source.Amount);
     }
+
+    public int CalculateTotalOutcome()
+    {
+        return _sources
+            .Where(source => source.Type == SourceTypes.Outcome)
+            .Sum(source => source.Amount);
+    }
 }

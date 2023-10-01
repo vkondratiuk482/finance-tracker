@@ -15,7 +15,10 @@ public class EfCoreCustomerRepository : ICustomerRepository
     public async Task<Customer?> GetById(Guid id)
     {
         return await _applicationContext.Customers
-            .Where(x => x.Id == id)
+            .Where(customer => customer.Id == id)
+            .Include(customer => customer.Budgets)
+            .ThenInclude(budget => budget.Categories)
+            .ThenInclude(category => category.Sources)
             .FirstOrDefaultAsync();
     }
 

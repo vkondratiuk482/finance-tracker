@@ -58,4 +58,9 @@ public class Budget
     {
         return _categories.Sum(category => category.CalculateTotalIncome());
     }
+
+    public int CalculateTotalOutcome()
+    {
+        return _categories.Sum(category => category.CalculateTotalOutcome());
+    }
 }

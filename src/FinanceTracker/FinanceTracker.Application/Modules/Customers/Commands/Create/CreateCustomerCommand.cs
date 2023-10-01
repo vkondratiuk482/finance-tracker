@@ -1,7 +1,7 @@
 using MediatR;
 using FinanceTracker.Domain.Customers;
 
-namespace FinanceTracker.Application.Modules.Customers.Commands.CreateCustomer;
+namespace FinanceTracker.Application.Modules.Customers.Commands.Create;
 
 public class CreateCustomerCommand : IRequest 
 {
