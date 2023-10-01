@@ -1,4 +1,4 @@
-namespace FinanceTracker.Api.Responses.Customer;
+namespace FinanceTracker.Api.Responses.Customers;
 
 public sealed class CustomerBalanceResponse
 {

@@ -24,7 +24,7 @@ public class EfCoreCustomerRepository : ICustomerRepository
 
     public async Task AddAsync(Customer customer)
     {
-        await _applicationContext.AddAsync(customer);
+        await _applicationContext.Customers.AddAsync(customer);
         await _applicationContext.SaveChangesAsync();
     }
 

@@ -1,7 +1,7 @@
+using Microsoft.EntityFrameworkCore;
 using FinanceTracker.Domain.Budgets;
 using FinanceTracker.Domain.Customers;
 using FinanceTracker.Persistence.EntityTypeConfigurations;
-using Microsoft.EntityFrameworkCore;
 
 namespace FinanceTracker.Persistence;
 
@@ -21,5 +21,6 @@ public class ApplicationContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.ApplyConfiguration(new CustomerEntityTypeConfiguration());
+        modelBuilder.ApplyConfiguration(new BudgetEntityTypeConfiguration());
     }
 }

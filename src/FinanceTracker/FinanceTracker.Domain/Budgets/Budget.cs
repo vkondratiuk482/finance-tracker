@@ -1,5 +1,3 @@
-using FinanceTracker.Domain.Customers;
-
 namespace FinanceTracker.Domain.Budgets;
 
 public class Budget
@@ -20,6 +18,8 @@ public class Budget
             {
                 throw new ArgumentOutOfRangeException("Payday has to be in range from 1 to 28");
             }
+
+            _payday = value;
         }
     }
 

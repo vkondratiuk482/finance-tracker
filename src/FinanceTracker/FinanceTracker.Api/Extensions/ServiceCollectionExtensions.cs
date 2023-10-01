@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Text.Json.Serialization;
+using FinanceTracker.Domain.Budgets;
 using FinanceTracker.Domain.Customers;
 using FinanceTracker.Persistence;
 using FinanceTracker.Persistence.Repositories;
@@ -57,6 +58,7 @@ public static class ServiceCollectionExtensions
         services.AddNpgsql<ApplicationContext>(connectionString);
 
         services.AddScoped<ICustomerRepository, EfCoreCustomerRepository>();
+        services.AddScoped<IBudgetRepository, EfCoreBudgetRepository>();
 
         return services;
     }
