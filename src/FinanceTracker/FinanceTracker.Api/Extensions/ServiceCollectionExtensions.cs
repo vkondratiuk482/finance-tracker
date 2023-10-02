@@ -59,6 +59,7 @@ public static class ServiceCollectionExtensions
 
         services.AddScoped<ICustomerRepository, EfCoreCustomerRepository>();
         services.AddScoped<IBudgetRepository, EfCoreBudgetRepository>();
+        services.AddScoped<ICategoryRepository, EfCoreCategoryRepository>();
 
         return services;
     }

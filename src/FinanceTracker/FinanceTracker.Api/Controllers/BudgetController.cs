@@ -1,5 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using FinanceTracker.Api.Requests.Budgets;
 using FinanceTracker.Api.Responses.Budgets;
 using FinanceTracker.Application.Modules.Budgets.Commands.Create;
 
@@ -18,7 +19,7 @@ public class BudgetController
 
     [HttpPost]
     [ProducesResponseType(typeof(CreateBudgetResponse), StatusCodes.Status201Created)]
-    public async Task<CreateBudgetResponse> Create([FromBody] CreateBudgetCommand request)
+    public async Task<CreateBudgetResponse> Create([FromBody] CreateBudgetRequest request)
     {
         var id = await _mediator.Send(new CreateBudgetCommand
         {
