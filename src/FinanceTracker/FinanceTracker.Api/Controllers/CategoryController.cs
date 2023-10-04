@@ -1,6 +1,6 @@
-using FinanceTracker.Api.Requests.Budgets;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using FinanceTracker.Api.Requests.Budgets;
 using FinanceTracker.Api.Responses.Budgets;
 using FinanceTracker.Application.Modules.Budgets.Commands.CreateCategory;
 
