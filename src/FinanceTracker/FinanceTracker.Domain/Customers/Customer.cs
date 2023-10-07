@@ -19,6 +19,8 @@ public class Customer
 
     public TaxationTypes TaxationType { get; private set; }
 
+    public ITaxationStrategy TaxationStrategy => TaxationStrategyFactory.Create(TaxationType);
+
     public Customer(TaxationTypes taxationType, Email email)
     {
         Id = Guid.NewGuid();
@@ -29,16 +31,6 @@ public class Customer
 
     private Customer()
     {
-    }
-
-    public void AddBudget(Budget budget)
-    {
-        _budgets.Add(budget);
-    }
-
-    public void RemoveBudget(Budget budget)
-    {
-        _budgets.Remove(budget);
     }
 
     public void UpdateTaxationType(TaxationTypes taxationType)

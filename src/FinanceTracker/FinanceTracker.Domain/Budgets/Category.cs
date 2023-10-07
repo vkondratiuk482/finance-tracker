@@ -24,16 +24,6 @@ public class Category
     {
     }
 
-    public void AddSource(Source source)
-    {
-        _sources.Add(source);
-    }
-
-    public void RemoveSource(Source source)
-    {
-        _sources.Remove(source);
-    }
-
     public int CalculateTotalIncome()
     {
         return _sources

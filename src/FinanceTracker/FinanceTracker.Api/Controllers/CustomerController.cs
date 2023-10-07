@@ -1,6 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using FinanceTracker.Api.Requests.Customer;
+using FinanceTracker.Api.Requests.Customers;
 using FinanceTracker.Api.Responses.Common;
 using FinanceTracker.Api.Responses.Customers;
 using FinanceTracker.Application.Modules.Customers.Commands.Create;

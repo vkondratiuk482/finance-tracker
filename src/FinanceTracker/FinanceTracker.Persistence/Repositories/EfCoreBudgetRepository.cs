@@ -1,4 +1,5 @@
 using FinanceTracker.Domain.Budgets;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinanceTracker.Persistence.Repositories;
 
@@ -9,6 +10,15 @@ public class EfCoreBudgetRepository : IBudgetRepository
     public EfCoreBudgetRepository(ApplicationContext applicationContext)
     {
         _applicationContext = applicationContext;
+    }
+
+    public async Task<Budget?> GetById(Guid id)
+    {
+        return await _applicationContext.Budgets
+            .Where(budget => budget.Id == id)
+            .Include(budget => budget.Categories)
+            .ThenInclude(category => category.Sources)
+            .FirstOrDefaultAsync();
     }
 
     public async Task AddAsync(Budget budget)

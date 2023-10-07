@@ -1,3 +1,5 @@
+using FinanceTracker.Domain.Customers;
+
 namespace FinanceTracker.Domain.Budgets;
 
 public class Budget
@@ -39,16 +41,6 @@ public class Budget
     {
     }
 
-    public void AddCategory(Category category)
-    {
-        _categories.Add(category);
-    }
-
-    public void RemoveCategory(Category category)
-    {
-        _categories.Remove(category);
-    }
-
     public void UpdatePayday(int payday)
     {
         Payday = payday;
@@ -62,5 +54,22 @@ public class Budget
     public int CalculateTotalOutcome()
     {
         return _categories.Sum(category => category.CalculateTotalOutcome());
+    }
+
+    public double CalculateAuthorizedDailyExpenses(Customer customer, DateTime? upTo)
+    {
+        var currentDate = DateTime.Now;
+
+        upTo ??= new DateTime(currentDate.Year, currentDate.Month + 1, Payday);
+
+        var income = CalculateTotalIncome();
+
+        var netto = income - customer.TaxationStrategy.Calculate(income);
+
+        var moneyLeft = netto - CalculateTotalOutcome();
+
+        var daysLeft = ((DateTime)upTo).Subtract(currentDate).TotalDays;
+
+        return moneyLeft / daysLeft;
     }
 }
