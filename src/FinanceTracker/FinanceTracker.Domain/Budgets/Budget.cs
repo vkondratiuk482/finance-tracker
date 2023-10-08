@@ -56,17 +56,27 @@ public class Budget
         return _categories.Sum(category => category.CalculateTotalOutcome());
     }
 
+    public int CalculateMoneyLeft(Customer customer)
+    {
+        var outcome = CalculateTotalOutcome();
+
+        return CalculateTotalNetto(customer) - outcome;
+    }
+
+    public int CalculateTotalNetto(Customer customer)
+    {
+        var income = CalculateTotalIncome();
+
+        return income - customer.TaxationStrategy.Calculate(income);
+    }
+
     public double CalculateAuthorizedDailyExpenses(Customer customer, DateTime? upTo)
     {
         var currentDate = DateTime.Now;
 
         upTo ??= new DateTime(currentDate.Year, currentDate.Month + 1, Payday);
 
-        var income = CalculateTotalIncome();
-
-        var netto = income - customer.TaxationStrategy.Calculate(income);
-
-        var moneyLeft = netto - CalculateTotalOutcome();
+        var moneyLeft = CalculateTotalNetto(customer) - CalculateTotalOutcome();
 
         var daysLeft = ((DateTime)upTo).Subtract(currentDate).TotalDays;
 

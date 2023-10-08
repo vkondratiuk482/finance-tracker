@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using FinanceTracker.Api.Requests.Budgets;
 using FinanceTracker.Api.Responses.Budgets;
 using FinanceTracker.Application.Modules.Budgets.Commands.Create;
-using FinanceTracker.Application.Modules.Budgets.Queries.CalculateAuthorizedDailyExpenses;
+using FinanceTracker.Application.Modules.Budgets.Queries.CalculateStatistics;
 
 namespace FinanceTracker.Api.Controllers;
 
@@ -19,21 +19,25 @@ public class BudgetController
     }
 
     [HttpGet]
-    [Route("authorized-daily-expenses")]
-    [ProducesResponseType(typeof(AuthorizedDailyExpensesResponse), StatusCodes.Status200OK)]
-    public async Task<AuthorizedDailyExpensesResponse> CalculateBalance([FromQuery] Guid id, [FromQuery] Guid customerId,
+    [Route("statistics")]
+    [ProducesResponseType(typeof(BudgetStatisticsResponse), StatusCodes.Status200OK)]
+    public async Task<BudgetStatisticsResponse> CalculateBalance([FromQuery] Guid id,
+        [FromQuery] Guid customerId,
         [FromQuery] DateTime? upTo = null)
     {
-        var dailyExpenses = await _mediator.Send(new CalculateAuthorizedDailyExpensesQuery
+        var statistics = await _mediator.Send(new CalculateBudgetStatisticsQuery
         {
             UpTo = upTo,
             BudgetId = id,
             CustomerId = customerId,
         });
 
-        return new AuthorizedDailyExpensesResponse
+        return new BudgetStatisticsResponse
         {
-            DailyExpenses = dailyExpenses,
+            Netto = statistics.Netto,
+            Brutto = statistics.Brutto,
+            MoneyLeft = statistics.MoneyLeft,
+            AuthorizedDailyExpenses = statistics.AuthorizedDailyExpenses,
         };
     }
 
