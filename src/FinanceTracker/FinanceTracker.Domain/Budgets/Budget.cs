@@ -78,7 +78,7 @@ public class Budget
 
         var moneyLeft = CalculateTotalNetto(customer) - CalculateTotalOutcome();
 
-        var daysLeft = ((DateTime)upTo).Subtract(currentDate).TotalDays;
+        var daysLeft = (int)((DateTime)upTo).Subtract(currentDate).TotalDays;
 
         return moneyLeft / daysLeft;
     }
