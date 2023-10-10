@@ -46,6 +46,11 @@ public class Budget
         Payday = payday;
     }
 
+    public void AddCategory(Category category)
+    {
+        _categories.Add(category);
+    }
+
     public int CalculateTotalIncome()
     {
         return _categories.Sum(category => category.CalculateTotalIncome());

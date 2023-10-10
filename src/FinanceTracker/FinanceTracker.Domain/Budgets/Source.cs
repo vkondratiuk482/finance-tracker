@@ -13,6 +13,8 @@ public class Source
     public SourceFrequencies Frequency { get; private set; }
 
     public string Description { get; private set; }
+    
+    public Guid? PiggyBankId { get; set; }
 
     public DateTime CreatedAt { get; private set; }
 
@@ -22,6 +24,7 @@ public class Source
         SourceFrequencies frequency,
         string description,
         Guid categoryId,
+        Guid? piggyBankId = null,
         DateTime? createdAt = null)
     {
         Id = Guid.NewGuid();
@@ -30,6 +33,7 @@ public class Source
         Frequency = frequency;
         CategoryId = categoryId;
         Description = description;
+        PiggyBankId = piggyBankId;
         CreatedAt = createdAt ?? DateTime.Now;
     }
 

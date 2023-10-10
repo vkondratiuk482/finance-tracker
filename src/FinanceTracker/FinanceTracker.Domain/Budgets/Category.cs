@@ -24,6 +24,11 @@ public class Category
     {
     }
 
+    public void AddSource(Source source)
+    {
+        _sources.Add(source);
+    }
+
     public int CalculateTotalIncome()
     {
         return _sources
