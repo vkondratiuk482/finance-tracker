@@ -62,6 +62,20 @@ public class PiggyBank
 
         category.AddSource(source);
     }
-    
-    // separate break method which withdraws all of the money
+
+    public void Break(Budget budget)
+    {
+        if (CollectedAmount == 0)
+        {
+            // there is nothing to withdraw 
+        }
+
+        var category = budget.Categories.First(category => category.Name == "Savings");
+
+        var source = new Source(CollectedAmount, SourceTypes.Income, SourceFrequencies.OneTime, Name, category.Id);
+
+        CollectedAmount = 0;
+
+        category.AddSource(source);
+    }
 }
