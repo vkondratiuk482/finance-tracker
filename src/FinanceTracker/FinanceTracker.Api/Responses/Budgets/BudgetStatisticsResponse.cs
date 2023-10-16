@@ -7,6 +7,8 @@ public sealed class BudgetStatisticsResponse
     public int Brutto { get; set; }
 
     public int MoneyLeft { get; set; }
+    
+    public int Savings { get; set; }
 
     public double AuthorizedDailyExpenses { get; set; }
 }

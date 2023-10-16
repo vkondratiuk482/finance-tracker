@@ -8,5 +8,7 @@ public class BudgetStatistics
 
     public int MoneyLeft { get; set; }
     
+    public int Savings { get; set; }
+    
     public double AuthorizedDailyExpenses { get; set; }
 }

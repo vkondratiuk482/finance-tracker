@@ -18,6 +18,7 @@ public class EfCoreBudgetRepository : IBudgetRepository
             .Where(budget => budget.Id == id)
             .Include(budget => budget.Categories)
             .ThenInclude(category => category.Sources)
+            .Include(budget => budget.PiggyBanks)
             .FirstOrDefaultAsync();
     }
 

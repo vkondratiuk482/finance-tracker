@@ -26,8 +26,10 @@ public class Budget
     }
 
     private readonly List<Category> _categories;
+    private readonly List<PiggyBank> _piggyBanks;
 
     public IReadOnlyList<Category> Categories => _categories.AsReadOnly();
+    public IReadOnlyList<PiggyBank> PiggyBanks => _piggyBanks.AsReadOnly();
 
     public Budget(Guid customerId, int payday = 1)
     {
@@ -35,6 +37,7 @@ public class Budget
         Payday = payday;
         CustomerId = customerId;
         _categories = new List<Category>();
+        _piggyBanks = new List<PiggyBank>();
     }
 
     private Budget()
@@ -59,6 +62,11 @@ public class Budget
     public int CalculateTotalOutcome()
     {
         return _categories.Sum(category => category.CalculateTotalOutcome());
+    }
+
+    public int CalculateTotalSavings()
+    {
+        return _piggyBanks.Sum(piggyBank => piggyBank.CollectedAmount);
     }
 
     public int CalculateMoneyLeft(Customer customer)

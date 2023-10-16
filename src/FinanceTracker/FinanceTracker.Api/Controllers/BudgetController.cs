@@ -36,6 +36,7 @@ public class BudgetController
         {
             Netto = statistics.Netto,
             Brutto = statistics.Brutto,
+            Savings = statistics.Savings,
             MoneyLeft = statistics.MoneyLeft,
             AuthorizedDailyExpenses = statistics.AuthorizedDailyExpenses,
         };

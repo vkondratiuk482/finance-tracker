@@ -27,6 +27,7 @@ public sealed class
         return new BudgetStatistics
         {
             Brutto = budget.CalculateTotalIncome(),
+            Savings = budget.CalculateTotalSavings(),
             Netto = budget.CalculateTotalNetto(customer),
             MoneyLeft = budget.CalculateMoneyLeft(customer),
             AuthorizedDailyExpenses = budget.CalculateAuthorizedDailyExpenses(customer, query.UpTo),

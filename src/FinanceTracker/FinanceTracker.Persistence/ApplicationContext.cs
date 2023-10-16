@@ -11,6 +11,7 @@ public class ApplicationContext : DbContext
     public DbSet<Budget> Budgets => Set<Budget>();
     public DbSet<Category> Categories => Set<Category>();
     public DbSet<Source> Sources => Set<Source>();
+    public DbSet<PiggyBank> PiggyBanks => Set<PiggyBank>();
 
     public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
     {
