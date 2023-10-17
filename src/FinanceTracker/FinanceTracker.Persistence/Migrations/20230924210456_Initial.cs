@@ -104,17 +104,6 @@ namespace FinanceTracker.Persistence.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Sources");
-
-            migrationBuilder.DropTable(
-                name: "Categories");
-
-            migrationBuilder.DropTable(
-                name: "Budgets");
-
-            migrationBuilder.DropTable(
-                name: "Customers");
         }
     }
 }

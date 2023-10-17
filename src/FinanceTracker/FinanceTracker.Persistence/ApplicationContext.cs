@@ -12,6 +12,7 @@ public class ApplicationContext : DbContext
     public DbSet<Category> Categories => Set<Category>();
     public DbSet<Source> Sources => Set<Source>();
     public DbSet<PiggyBank> PiggyBanks => Set<PiggyBank>();
+    public DbSet<Currency> Currencies => Set<Currency>();
 
     public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
     {

@@ -16,6 +16,7 @@ public sealed class CreateSourceHandler : IRequestHandler<CreateSourceCommand, G
     {
         var source = new Source(
             command.Amount,
+            command.CurrencyId,
             command.Type,
             command.Frequency,
             command.Description,

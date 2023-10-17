@@ -5,6 +5,8 @@ public class Source
     public Guid Id { get; init; }
 
     public int Amount { get; private set; }
+    
+    public Guid CurrencyId { get; private set; }
 
     public Guid CategoryId { get; private set; }
 
@@ -20,6 +22,7 @@ public class Source
 
     public Source(
         int amount,
+        Guid currencyId,
         SourceTypes type,
         SourceFrequencies frequency,
         string description,
@@ -31,6 +34,7 @@ public class Source
         Type = type;
         Amount = amount;
         Frequency = frequency;
+        CurrencyId = currencyId;
         CategoryId = categoryId;
         Description = description;
         PiggyBankId = piggyBankId;

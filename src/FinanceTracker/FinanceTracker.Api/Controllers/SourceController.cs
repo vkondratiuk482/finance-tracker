@@ -8,7 +8,7 @@ namespace FinanceTracker.Api.Controllers;
 
 [ApiController]
 [Route("api/source")]
-public class SourceController
+public sealed class SourceController
 {
     private readonly IMediator _mediator;
 
@@ -23,10 +23,11 @@ public class SourceController
     {
         var id = await _mediator.Send(new CreateSourceCommand
         {
-            Amount = request.Amount,
             Type = request.Type,
+            Amount = request.Amount,
             Frequency = request.Frequency,
             CategoryId = request.CategoryId,
+            CurrencyId = request.CurrencyId,
             Description = request.Description,
         });
 

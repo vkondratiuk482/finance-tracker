@@ -12,37 +12,47 @@ public class PiggyBank
 
     public int CollectedAmount { get; private set; }
 
+    public Guid CurrencyId { get; private set; }
+
     public DateTime UpTo { get; private set; }
 
-    public PiggyBank(Guid budgetId, string name, int expectedAmount, DateTime upTo)
+    private readonly string _categoryName = "Savings";
+
+    private readonly List<Source> _sources;
+
+    public IReadOnlyList<Source> Sources => _sources.AsReadOnly();
+
+    public PiggyBank(Guid budgetId, Guid currencyId, string name, int expectedAmount, DateTime upTo)
     {
         Id = Guid.NewGuid();
         Name = name;
         UpTo = upTo;
         BudgetId = budgetId;
         CollectedAmount = 0;
+        CurrencyId = currencyId;
         ExpectedAmount = expectedAmount;
+        _sources = new List<Source>();
     }
 
-    public void Fill(Budget budget, int amount)
+    public void Fill(Budget budget, Currency currency, int amount)
     {
-        var category = budget.Categories.FirstOrDefault(category => category.Name == "Savings");
+        var category = budget.Categories.FirstOrDefault(category => category.Name == _categoryName);
 
         if (category == null)
         {
-            category = new Category("Savings", budget.Id);
+            category = new Category(_categoryName, budget.Id);
 
             budget.AddCategory(category);
         }
 
         CollectedAmount += amount;
 
-        var source = new Source(amount, SourceTypes.Outcome, SourceFrequencies.OneTime, Name, category.Id);
+        var source = new Source(amount, currency.Id, SourceTypes.Outcome, SourceFrequencies.OneTime, Name, category.Id);
 
         category.AddSource(source);
     }
 
-    public void Withdraw(Budget budget, int amount)
+    public void Withdraw(Budget budget, Currency currency, int amount)
     {
         if (CollectedAmount == 0)
         {
@@ -54,25 +64,26 @@ public class PiggyBank
             // you can't withdraw more than you actually have on your savings account
         }
 
-        var category = budget.Categories.First(category => category.Name == "Savings");
+        var category = budget.Categories.First(category => category.Name == _categoryName);
 
         CollectedAmount -= amount;
 
-        var source = new Source(amount, SourceTypes.Income, SourceFrequencies.OneTime, Name, category.Id);
+        var source = new Source(amount, currency.Id, SourceTypes.Income, SourceFrequencies.OneTime, Name, category.Id);
 
         category.AddSource(source);
     }
 
-    public void Break(Budget budget)
+    public void Break(Budget budget, Currency currency)
     {
         if (CollectedAmount == 0)
         {
             // there is nothing to withdraw 
         }
 
-        var category = budget.Categories.First(category => category.Name == "Savings");
+        var category = budget.Categories.First(category => category.Name == _categoryName);
 
-        var source = new Source(CollectedAmount, SourceTypes.Income, SourceFrequencies.OneTime, Name, category.Id);
+        var source = new Source(CollectedAmount, currency.Id, SourceTypes.Income, SourceFrequencies.OneTime, Name,
+            category.Id);
 
         CollectedAmount = 0;
 

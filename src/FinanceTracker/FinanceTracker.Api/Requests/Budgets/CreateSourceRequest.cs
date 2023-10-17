@@ -13,4 +13,6 @@ public class CreateSourceRequest
     public string Description { get; set; }
     
     public Guid CategoryId { get; set; }
+    
+    public Guid CurrencyId { get; set; }
 }

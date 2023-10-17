@@ -8,7 +8,7 @@ namespace FinanceTracker.Api.Controllers;
 
 [ApiController]
 [Route("api/category")]
-public class CategoryController
+public sealed class CategoryController
 {
     private readonly IMediator _mediator;
 

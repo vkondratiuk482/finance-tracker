@@ -9,7 +9,7 @@ namespace FinanceTracker.Api.Controllers;
 
 [ApiController]
 [Route("api/budget")]
-public class BudgetController
+public sealed class BudgetController
 {
     private readonly IMediator _mediator;
 
