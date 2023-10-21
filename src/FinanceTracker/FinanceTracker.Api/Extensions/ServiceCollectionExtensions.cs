@@ -2,8 +2,8 @@ using System.Reflection;
 using System.Text.Json.Serialization;
 using FinanceTracker.Domain.Budgets;
 using FinanceTracker.Domain.Customers;
-using FinanceTracker.Persistence;
-using FinanceTracker.Persistence.Repositories;
+using FinanceTracker.Infrastructure.Persistence;
+using FinanceTracker.Infrastructure.Persistence.Repositories;
 
 namespace FinanceTracker.Api.Extensions;
 

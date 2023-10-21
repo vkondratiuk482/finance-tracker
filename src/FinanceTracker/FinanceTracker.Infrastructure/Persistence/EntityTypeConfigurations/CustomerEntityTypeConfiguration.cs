@@ -2,7 +2,7 @@ using FinanceTracker.Domain.Customers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace FinanceTracker.Persistence.EntityTypeConfigurations;
+namespace FinanceTracker.Infrastructure.Persistence.EntityTypeConfigurations;
 
 public class CustomerEntityTypeConfiguration : IEntityTypeConfiguration<Customer>
 {

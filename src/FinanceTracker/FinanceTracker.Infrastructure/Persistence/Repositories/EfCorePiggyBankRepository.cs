@@ -1,7 +1,7 @@
 using FinanceTracker.Domain.Budgets;
 using Microsoft.EntityFrameworkCore;
 
-namespace FinanceTracker.Persistence.Repositories;
+namespace FinanceTracker.Infrastructure.Persistence.Repositories;
 
 public class EfCorePiggyBankRepository : IPiggyBankRepository
 {

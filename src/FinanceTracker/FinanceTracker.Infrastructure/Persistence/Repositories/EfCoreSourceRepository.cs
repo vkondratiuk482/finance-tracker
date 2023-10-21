@@ -1,6 +1,6 @@
 using FinanceTracker.Domain.Budgets;
 
-namespace FinanceTracker.Persistence.Repositories;
+namespace FinanceTracker.Infrastructure.Persistence.Repositories;
 
 public class EfCoreSourceRepository : ISourceRepository
 {

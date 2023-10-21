@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using FinanceTracker.Domain.Budgets;
 using FinanceTracker.Domain.Customers;
-using FinanceTracker.Persistence.EntityTypeConfigurations;
+using FinanceTracker.Infrastructure.Persistence.EntityTypeConfigurations;
 
-namespace FinanceTracker.Persistence;
+namespace FinanceTracker.Infrastructure.Persistence;
 
 public class ApplicationContext : DbContext
 {

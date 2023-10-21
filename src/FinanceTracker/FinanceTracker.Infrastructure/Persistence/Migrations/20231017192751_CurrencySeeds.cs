@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace FinanceTracker.Persistence.Migrations
+namespace FinanceTracker.Infrastructure.Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class CurrencySeeds : Migration
