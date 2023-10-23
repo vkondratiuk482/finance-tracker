@@ -26,7 +26,6 @@ public sealed class PiggyBankController
             Name = request.Name,
             UpTo = request.UpTo,
             BudgetId = request.BudgetId,
-            CurrencyId = request.CurrencyId,
             ExpectedAmount = request.ExpectedAmount,
         });
 

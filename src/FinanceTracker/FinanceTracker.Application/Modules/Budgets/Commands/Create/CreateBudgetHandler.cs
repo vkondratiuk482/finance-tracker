@@ -14,7 +14,7 @@ public sealed class CreateBudgetHandler : IRequestHandler<CreateBudgetCommand, G
 
     public async Task<Guid> Handle(CreateBudgetCommand command, CancellationToken cancellationToken)
     {
-        var budget = new Budget(command.CustomerId, command.Payday);
+        var budget = new Budget(command.CustomerId, command.CurrencyId, command.Payday);
 
         await _budgetRepository.AddAsync(budget);
 

@@ -6,6 +6,9 @@ public sealed class CreateBudgetRequest
 {
     [Required] 
     public Guid CustomerId { get; set; }
+    
+    [Required] 
+    public Guid CurrencyId { get; set; }
 
     [Required] 
     public int Payday { get; set; }

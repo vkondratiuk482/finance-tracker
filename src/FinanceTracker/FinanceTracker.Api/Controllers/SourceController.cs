@@ -27,7 +27,6 @@ public sealed class SourceController
             Amount = request.Amount,
             Frequency = request.Frequency,
             CategoryId = request.CategoryId,
-            CurrencyId = request.CurrencyId,
             Description = request.Description,
         });
 

@@ -7,6 +7,8 @@ public class Budget
     public Guid Id { get; init; }
 
     public Guid CustomerId { get; private set; }
+    
+    public Guid CurrencyId { get; private set; }
 
     private int _payday;
 
@@ -31,11 +33,12 @@ public class Budget
     public IReadOnlyList<Category> Categories => _categories.AsReadOnly();
     public IReadOnlyList<PiggyBank> PiggyBanks => _piggyBanks.AsReadOnly();
 
-    public Budget(Guid customerId, int payday = 1)
+    public Budget(Guid customerId, Guid currencyId, int payday = 1)
     {
         Id = Guid.NewGuid();
         Payday = payday;
         CustomerId = customerId;
+        CurrencyId = currencyId;
         _categories = new List<Category>();
         _piggyBanks = new List<PiggyBank>();
     }
@@ -83,7 +86,7 @@ public class Budget
         return income - customer.TaxationStrategy.Calculate(income);
     }
 
-    public double CalculateAuthorizedDailyExpenses(Customer customer, DateTime? upTo)
+    public decimal CalculateAuthorizedDailyExpenses(Customer customer, DateTime? upTo)
     {
         var currentDate = DateTime.Now;
 

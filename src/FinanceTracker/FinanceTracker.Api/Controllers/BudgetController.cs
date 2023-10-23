@@ -23,12 +23,14 @@ public sealed class BudgetController
     [ProducesResponseType(typeof(BudgetStatisticsResponse), StatusCodes.Status200OK)]
     public async Task<BudgetStatisticsResponse> CalculateBalance([FromQuery] Guid id,
         [FromQuery] Guid customerId,
+        [FromQuery] Guid currencyId,
         [FromQuery] DateTime? upTo = null)
     {
         var statistics = await _mediator.Send(new CalculateBudgetStatisticsQuery
         {
             UpTo = upTo,
             BudgetId = id,
+            CurrencyId = currencyId,
             CustomerId = customerId,
         });
 
@@ -50,6 +52,7 @@ public sealed class BudgetController
         {
             Payday = request.Payday,
             CustomerId = request.CustomerId,
+            CurrencyId = request.CurrencyId,
         });
 
         return new CreateBudgetResponse

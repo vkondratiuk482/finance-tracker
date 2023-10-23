@@ -5,8 +5,6 @@ namespace FinanceTracker.Application.Modules.Budgets.Commands.CreatePiggyBank;
 public class CreatePiggyBankCommand : IRequest<Guid>
 {
     public Guid BudgetId { get; set; }
-    
-    public Guid CurrencyId { get; set; }
 
     public string Name { get; set; }
 

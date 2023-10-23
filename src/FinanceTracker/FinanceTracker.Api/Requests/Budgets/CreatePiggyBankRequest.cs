@@ -6,9 +6,6 @@ public sealed class CreatePiggyBankRequest
 {
     [Required] 
     public Guid BudgetId { get; set; }
-    
-    [Required] 
-    public Guid CurrencyId { get; set; }
 
     [Required] 
     public string Name { get; set; }

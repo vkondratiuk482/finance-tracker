@@ -2,13 +2,13 @@ namespace FinanceTracker.Application.Modules.Budgets.Queries.CalculateStatistics
 
 public class BudgetStatistics
 {
-    public int Netto { get; set; }
+    public decimal Netto { get; set; }
 
-    public int Brutto { get; set; }
+    public decimal Brutto { get; set; }
 
-    public int MoneyLeft { get; set; }
+    public decimal MoneyLeft { get; set; }
     
-    public int Savings { get; set; }
+    public decimal Savings { get; set; }
     
-    public double AuthorizedDailyExpenses { get; set; }
+    public decimal AuthorizedDailyExpenses { get; set; }
 }

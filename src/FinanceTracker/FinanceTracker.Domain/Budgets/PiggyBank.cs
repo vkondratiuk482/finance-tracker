@@ -12,8 +12,6 @@ public class PiggyBank
 
     public int CollectedAmount { get; private set; }
 
-    public Guid CurrencyId { get; private set; }
-
     public DateTime UpTo { get; private set; }
 
     private readonly string _categoryName = "Savings";
@@ -22,19 +20,18 @@ public class PiggyBank
 
     public IReadOnlyList<Source> Sources => _sources.AsReadOnly();
 
-    public PiggyBank(Guid budgetId, Guid currencyId, string name, int expectedAmount, DateTime upTo)
+    public PiggyBank(Guid budgetId, string name, int expectedAmount, DateTime upTo)
     {
         Id = Guid.NewGuid();
         Name = name;
         UpTo = upTo;
         BudgetId = budgetId;
         CollectedAmount = 0;
-        CurrencyId = currencyId;
         ExpectedAmount = expectedAmount;
         _sources = new List<Source>();
     }
 
-    public void Fill(Budget budget, Currency currency, int amount)
+    public void Fill(Budget budget, int amount)
     {
         var category = budget.Categories.FirstOrDefault(category => category.Name == _categoryName);
 
@@ -47,12 +44,12 @@ public class PiggyBank
 
         CollectedAmount += amount;
 
-        var source = new Source(amount, currency.Id, SourceTypes.Outcome, SourceFrequencies.OneTime, Name, category.Id);
+        var source = new Source(amount, SourceTypes.Outcome, SourceFrequencies.OneTime, Name, category.Id);
 
         category.AddSource(source);
     }
 
-    public void Withdraw(Budget budget, Currency currency, int amount)
+    public void Withdraw(Budget budget, int amount)
     {
         if (CollectedAmount == 0)
         {
@@ -68,7 +65,7 @@ public class PiggyBank
 
         CollectedAmount -= amount;
 
-        var source = new Source(amount, currency.Id, SourceTypes.Income, SourceFrequencies.OneTime, Name, category.Id);
+        var source = new Source(amount, SourceTypes.Income, SourceFrequencies.OneTime, Name, category.Id);
 
         category.AddSource(source);
     }
@@ -82,7 +79,7 @@ public class PiggyBank
 
         var category = budget.Categories.First(category => category.Name == _categoryName);
 
-        var source = new Source(CollectedAmount, currency.Id, SourceTypes.Income, SourceFrequencies.OneTime, Name,
+        var source = new Source(CollectedAmount, SourceTypes.Income, SourceFrequencies.OneTime, Name,
             category.Id);
 
         CollectedAmount = 0;

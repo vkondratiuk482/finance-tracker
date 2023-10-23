@@ -11,7 +11,7 @@ public class MonobankCurrencyClientAdapter : ICurrencyClient
         _monobankClient = monobankClient;
     }
 
-    public async Task<CurrencyRate?> GetRateAsync(Currency source, Currency target)
+    public async Task<CurrencyRate> GetRateAsync(Currency source, Currency target)
     {
         var monobankRates = await _monobankClient.GetRateAsync();
 
@@ -21,6 +21,12 @@ public class MonobankCurrencyClientAdapter : ICurrencyClient
                 monobankRate.CurrencyCodeB == target.Iso4217Num)
             {
                 return new CurrencyRate(source, target, monobankRate.RateSell, monobankRate.RateBuy);
+            }
+
+            if (monobankRate.CurrencyCodeA == target.Iso4217Num &&
+                monobankRate.CurrencyCodeB == source.Iso4217Num)
+            {
+                return new CurrencyRate(source, target, monobankRate.RateBuy, monobankRate.RateSell);
             }
         }
 

@@ -14,7 +14,7 @@ public sealed class CreateCategoryHandler : IRequestHandler<CreatePiggyBankComma
 
     public async Task<Guid> Handle(CreatePiggyBankCommand command, CancellationToken cancellationToken)
     {
-        var piggyBank = new PiggyBank(command.BudgetId, command.CurrencyId, command.Name, command.ExpectedAmount, command.UpTo);
+        var piggyBank = new PiggyBank(command.BudgetId, command.Name, command.ExpectedAmount, command.UpTo);
 
         await _piggyBankRepository.AddAsync(piggyBank);
 
