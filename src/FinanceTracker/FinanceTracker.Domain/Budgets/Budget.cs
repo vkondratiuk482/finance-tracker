@@ -7,7 +7,7 @@ public class Budget
     public Guid Id { get; init; }
 
     public Guid CustomerId { get; private set; }
-    
+
     public Guid CurrencyId { get; private set; }
 
     private int _payday;
@@ -88,13 +88,23 @@ public class Budget
 
     public decimal CalculateAuthorizedDailyExpenses(Customer customer, DateTime? upTo)
     {
-        var currentDate = DateTime.Now;
+        if (upTo.HasValue && upTo.Value <= DateTime.Now.Date)
+        {
+            throw new Exception("upTo can not be less or equal to current date");
+        }
 
-        upTo ??= new DateTime(currentDate.Year, currentDate.Month + 1, Payday);
+        var nextPaydayDate = new DateTime(DateTime.Now.Year, DateTime.Now.Month, Payday);
+
+        if (Payday < DateTime.Now.Day)
+        {
+            nextPaydayDate = nextPaydayDate.AddMonths(1);
+        }
+
+        upTo ??= nextPaydayDate;
 
         var moneyLeft = CalculateTotalNetto(customer) - CalculateTotalOutcome();
 
-        var daysLeft = (int)((DateTime)upTo).Subtract(currentDate).TotalDays;
+        var daysLeft = (int)((DateTime)upTo).Subtract(DateTime.Now.Date).TotalDays;
 
         return moneyLeft / daysLeft;
     }

@@ -15,6 +15,8 @@ public class MonobankCurrencyClientAdapter : ICurrencyClient
     {
         var monobankRates = await _monobankClient.GetRateAsync();
 
+        // TODO: implement internal caching in order to prevent 429 http error
+        
         foreach (var monobankRate in monobankRates)
         {
             if (monobankRate.CurrencyCodeA == source.Iso4217Num &&

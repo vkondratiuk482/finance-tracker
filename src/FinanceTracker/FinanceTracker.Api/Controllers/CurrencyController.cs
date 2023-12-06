@@ -1,8 +1,6 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using FinanceTracker.Api.Requests.Budgets;
 using FinanceTracker.Api.Responses.Budgets;
-using FinanceTracker.Application.Modules.Budgets.Commands.CreateCategory;
 using FinanceTracker.Application.Modules.Budgets.Queries.GetCurrencies;
 
 namespace FinanceTracker.Api.Controllers;
@@ -31,8 +29,8 @@ public sealed class CurrencyController
             response.Add(new CurrencyResponse
             {
                 Id = currency.Id,
-                Iso4217Num= currency.Iso4217Num,
-                Iso4217Code= currency.Iso4217Code,
+                Iso4217Num = currency.Iso4217Num,
+                Iso4217Code = currency.Iso4217Code,
             });
         }
 

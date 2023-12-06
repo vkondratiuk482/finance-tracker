@@ -33,25 +33,21 @@ public sealed class
         
         if (query.CurrencyId != budget.CurrencyId)
         {
-            var sourceTask = _currencyRepository.GetByIdAsync(budget.CurrencyId);
-            var targetTask = _currencyRepository.GetByIdAsync(query.CurrencyId);
+            var sourceTask = await _currencyRepository.GetByIdAsync(budget.CurrencyId);
+            var targetTask = await _currencyRepository.GetByIdAsync(query.CurrencyId);
 
-            await Task.WhenAll(sourceTask, targetTask);
+            var currencyRate = await _currencyClient.GetRateAsync(sourceTask, targetTask);
 
-            var currencyRate = await _currencyClient.GetRateAsync(sourceTask.Result, targetTask.Result);
-
-            // Decide which rate to take
-            // Test it out in practice
             rate = currencyRate.Buy;
         }
 
         return new BudgetStatistics
         {
-            Brutto = budget.CalculateTotalIncome() / rate,
-            Savings = budget.CalculateTotalSavings() / rate,
-            Netto = budget.CalculateTotalNetto(customer) / rate,
-            MoneyLeft = budget.CalculateMoneyLeft(customer) / rate,
-            AuthorizedDailyExpenses = budget.CalculateAuthorizedDailyExpenses(customer, query.UpTo) / rate,
+            Brutto = budget.CalculateTotalIncome() * rate,
+            Savings = budget.CalculateTotalSavings() * rate,
+            Netto = budget.CalculateTotalNetto(customer) * rate,
+            MoneyLeft = budget.CalculateMoneyLeft(customer) * rate,
+            AuthorizedDailyExpenses = budget.CalculateAuthorizedDailyExpenses(customer, query.UpTo) * rate,
         };
     }
 }
