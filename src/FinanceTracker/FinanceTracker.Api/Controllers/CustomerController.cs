@@ -9,7 +9,7 @@ using FinanceTracker.Application.Modules.Customers.Commands.UpdateTaxationType;
 namespace FinanceTracker.Api.Controllers;
 
 [ApiController]
-[Route("api/customer")]
+[Route("api/customers")]
 public sealed class CustomerController : Controller
 {
     private readonly IMediator _mediator;

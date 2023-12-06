@@ -2,5 +2,7 @@ namespace FinanceTracker.Domain.Budgets;
 
 public interface ICurrencyRepository
 {
-    Task<Currency?> GetById(Guid id);
+    Task<Currency?> GetByIdAsync(Guid id);
+    
+    Task<List<Currency>> GetAsync();
 }

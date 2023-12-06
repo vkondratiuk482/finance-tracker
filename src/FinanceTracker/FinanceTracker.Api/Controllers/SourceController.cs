@@ -7,7 +7,7 @@ using FinanceTracker.Application.Modules.Budgets.Commands.CreateSource;
 namespace FinanceTracker.Api.Controllers;
 
 [ApiController]
-[Route("api/source")]
+[Route("api/sources")]
 public sealed class SourceController
 {
     private readonly IMediator _mediator;

@@ -26,7 +26,7 @@ public class MonobankCurrencyClientAdapter : ICurrencyClient
             if (monobankRate.CurrencyCodeA == target.Iso4217Num &&
                 monobankRate.CurrencyCodeB == source.Iso4217Num)
             {
-                return new CurrencyRate(source, target, monobankRate.RateBuy, monobankRate.RateSell);
+                return new CurrencyRate(source, target, 1 / monobankRate.RateSell, 1 / monobankRate.RateBuy);
             }
         }
 

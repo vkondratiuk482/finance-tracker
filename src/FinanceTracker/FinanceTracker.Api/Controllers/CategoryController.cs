@@ -7,7 +7,7 @@ using FinanceTracker.Application.Modules.Budgets.Commands.CreateCategory;
 namespace FinanceTracker.Api.Controllers;
 
 [ApiController]
-[Route("api/category")]
+[Route("api/categories")]
 public sealed class CategoryController
 {
     private readonly IMediator _mediator;

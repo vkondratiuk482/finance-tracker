@@ -8,7 +8,7 @@ using FinanceTracker.Application.Modules.Budgets.Queries.CalculateStatistics;
 namespace FinanceTracker.Api.Controllers;
 
 [ApiController]
-[Route("api/budget")]
+[Route("api/budgets")]
 public sealed class BudgetController
 {
     private readonly IMediator _mediator;

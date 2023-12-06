@@ -7,7 +7,7 @@ using FinanceTracker.Application.Modules.Budgets.Commands.CreatePiggyBank;
 namespace FinanceTracker.Api.Controllers;
 
 [ApiController]
-[Route("api/piggy-bank")]
+[Route("api/piggy-banks")]
 public sealed class PiggyBankController
 {
     private readonly IMediator _mediator;

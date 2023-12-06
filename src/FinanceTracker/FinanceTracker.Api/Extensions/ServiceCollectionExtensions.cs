@@ -2,6 +2,7 @@ using System.Reflection;
 using System.Text.Json.Serialization;
 using FinanceTracker.Domain.Budgets;
 using FinanceTracker.Domain.Customers;
+using FinanceTracker.Infrastructure.Clients.Monobank;
 using FinanceTracker.Infrastructure.Persistence;
 using FinanceTracker.Infrastructure.Persistence.Repositories;
 
@@ -39,6 +40,9 @@ public static class ServiceCollectionExtensions
         var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(assemblies));
+        services.AddScoped<HttpClient>();
+        services.AddScoped<MonobankClient>();
+        services.AddScoped<ICurrencyClient, MonobankCurrencyClientAdapter>();
 
         return services;
     }
@@ -62,6 +66,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ICategoryRepository, EfCoreCategoryRepository>();
         services.AddScoped<ISourceRepository, EfCoreSourceRepository>();
         services.AddScoped<IPiggyBankRepository, EfCorePiggyBankRepository>();
+        services.AddScoped<ICurrencyRepository, EfCoreCurrencyRepository>();
 
         return services;
     }
