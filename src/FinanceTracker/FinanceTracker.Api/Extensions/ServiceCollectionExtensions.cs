@@ -1,10 +1,13 @@
 using System.Reflection;
 using System.Text.Json.Serialization;
 using FinanceTracker.Domain.Budgets;
+using FinanceTracker.Domain.Common;
 using FinanceTracker.Domain.Customers;
+using FinanceTracker.Infrastructure.Cache;
 using FinanceTracker.Infrastructure.Clients.Monobank;
 using FinanceTracker.Infrastructure.Persistence;
 using FinanceTracker.Infrastructure.Persistence.Repositories;
+using StackExchange.Redis;
 
 namespace FinanceTracker.Api.Extensions;
 
@@ -60,6 +63,15 @@ public static class ServiceCollectionExtensions
             $"Host={postgresHost};Port={postgresPort};Database={postgresDatabase};Username={postgresUser};Password={postgresPassword}";
 
         services.AddNpgsql<ApplicationContext>(connectionString);
+        
+        var redisConfigOptions = new ConfigurationOptions
+        {
+            Password = configuration["Redis:Password"],
+            EndPoints = { configuration["Redis:EndPoint"], },
+        };
+
+        services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(redisConfigOptions));
+        services.AddScoped<ICacheService, RedisCacheService>();
 
         services.AddScoped<ICustomerRepository, EfCoreCustomerRepository>();
         services.AddScoped<IBudgetRepository, EfCoreBudgetRepository>();

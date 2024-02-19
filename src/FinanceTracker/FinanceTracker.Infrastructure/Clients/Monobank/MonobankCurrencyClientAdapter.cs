@@ -1,34 +1,47 @@
 using FinanceTracker.Domain.Budgets;
+using FinanceTracker.Domain.Common;
+using FinanceTracker.Infrastructure.Clients.Monobank.Responses;
 
 namespace FinanceTracker.Infrastructure.Clients.Monobank;
 
 public class MonobankCurrencyClientAdapter : ICurrencyClient
 {
+    private readonly ICacheService _cacheService;
     private readonly MonobankClient _monobankClient;
+    
+    private const string CachingKey = "monobank:currencies";
 
-    public MonobankCurrencyClientAdapter(MonobankClient monobankClient)
+    public MonobankCurrencyClientAdapter(MonobankClient monobankClient, ICacheService cacheService)
     {
+        _cacheService = cacheService;
         _monobankClient = monobankClient;
     }
 
     public async Task<CurrencyRate> GetRateAsync(Currency source, Currency target)
     {
-        var monobankRates = await _monobankClient.GetRateAsync();
-
-        // TODO: implement internal caching in order to prevent 429 http error
+        List<MonobankCurrencyRateResponse> rates;
         
-        foreach (var monobankRate in monobankRates)
+        rates = await _cacheService.GetAsync<List<MonobankCurrencyRateResponse>>(CachingKey);
+
+        if (rates is null)
         {
-            if (monobankRate.CurrencyCodeA == source.Iso4217Num &&
-                monobankRate.CurrencyCodeB == target.Iso4217Num)
+            rates = await _monobankClient.GetRateAsync();
+            
+            await _cacheService.SetAsync(CachingKey, rates, TimeSpan.FromMinutes(10));
+        }
+        
+        foreach (var rate in rates)
+        {
+            if (rate.CurrencyCodeA == source.Iso4217Num &&
+                rate.CurrencyCodeB == target.Iso4217Num)
             {
-                return new CurrencyRate(source, target, monobankRate.RateSell, monobankRate.RateBuy);
+                return new CurrencyRate(source, target, rate.RateSell, rate.RateBuy);
             }
 
-            if (monobankRate.CurrencyCodeA == target.Iso4217Num &&
-                monobankRate.CurrencyCodeB == source.Iso4217Num)
+            if (rate.CurrencyCodeA == target.Iso4217Num &&
+                rate.CurrencyCodeB == source.Iso4217Num)
             {
-                return new CurrencyRate(source, target, 1 / monobankRate.RateSell, 1 / monobankRate.RateBuy);
+                return new CurrencyRate(source, target, 1 / rate.RateSell, 1 / rate.RateBuy);
             }
         }
 
